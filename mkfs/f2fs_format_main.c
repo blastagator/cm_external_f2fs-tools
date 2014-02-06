@@ -119,7 +119,6 @@ static void f2fs_parse_options(int argc, char *argv[])
 			config.bytes_reserved = atoi(optarg);
 			break;
 		default:
-			MSG(0, "\tError: Unknown option %c\n",option);
 			mkfs_usage();
 			break;
 		}
