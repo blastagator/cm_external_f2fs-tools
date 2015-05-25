@@ -17,9 +17,14 @@
 #include <sys/mount.h>
 #include <time.h>
 //#include <linux/fs.h>
-#include <uuid/uuid.h>
 
+#ifndef ANDROID
+#include <uuid/uuid.h>
 #include "f2fs_fs.h"
+#else
+#include "include/f2fs_fs.h"
+#endif
+
 #include "f2fs_format_utils.h"
 
 extern struct f2fs_configuration config;
@@ -126,8 +131,10 @@ int main(int argc, char *argv[])
 
 	f2fs_parse_options(argc, argv);
 
+#ifndef ANDROID
 	if (f2fs_dev_is_umounted(&config) < 0)
 		return -1;
+#endif
 
 	if (f2fs_get_device_info(&config) < 0)
 		return -1;
