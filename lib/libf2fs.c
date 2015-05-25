@@ -23,7 +23,11 @@
 #include <sys/mount.h>
 #include <sys/ioctl.h>
 
+#ifndef ANDROID
 #include <f2fs_fs.h>
+#else
+#include "include/f2fs_fs.h"
+#endif
 
 #ifdef __ANDROID__
 char *hasmntopt (const struct mntent *mnt, const char *opt) {
@@ -525,6 +529,7 @@ void f2fs_init_configuration(struct f2fs_configuration *c)
 	c->ro = 0;
 }
 
+#ifndef ANDROID
 static int is_mounted(const char *mpt, const char *device)
 {
 #ifdef __linux__
@@ -593,6 +598,7 @@ int f2fs_dev_is_umounted(struct f2fs_configuration *c)
 	}
 	return 0;
 }
+#endif
 
 void get_kernel_version(__u8 *version)
 {

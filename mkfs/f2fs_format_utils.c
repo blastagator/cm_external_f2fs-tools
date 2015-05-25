@@ -18,7 +18,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#ifndef ANDROID
 #include "f2fs_fs.h"
+#else
+#include "include/f2fs_fs.h"
+#endif
 
 #if defined(__linux__)
 #include <linux/fs.h>
